@@ -493,3 +493,16 @@ onBeforeRouteUpdate((to,from)=>{
             console.log(to,from)
         })
 ```
+
+## Teleport 将子节点渲染到存在于父组件以外的 DOM 节点\
+
+```js
+  <button @click="showToast" class="btn">打开 toast</button>
+  <!-- to 属性就是目标位置 -->
+  <teleport to="#teleport-target">
+    <div v-if="visible" class="toast-wrap">
+      <div class="toast-msg">我是一个 Toast 文案</div>
+    </div>
+  </teleport>
+
+```

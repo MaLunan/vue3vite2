@@ -1,13 +1,14 @@
 <template>
   <div>
-      zhuye
+      <div>
+          <!-- {{'ma'}} -->
+          ma
+      </div>
   </div>
 </template>
 
 <script>
-export default {
 
-}
 </script>
 
 <style>
