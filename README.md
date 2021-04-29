@@ -189,12 +189,46 @@ emit('myemit')//触发emit
 </script>
 
 ```
+或者
 
-## 没有this，通过useContext()获取上下文
+``` js
+<script>
+import {useContext} from 'vue'
+export default{
+ setup(){
+    const cxt=useContext()
+    cxt.emit('myemit')
+    // console.log(cxt===cxt2)//true
+ }
+}
+</script>
+```
+或者
+
+``` js
+<script>
+export default{
+ setup(props,cxt){//也可以(props,{emit})
+    cxt.emit('myemit')
+ }
+}
+</script>
+```
+
+## getCurrentInstance 支持访问内部组件实例，用于高阶用法或库的开发。
+
+```js
+import { getCurrentInstance } from 'vue'
+setup() {
+    const internalInstance = getCurrentInstance()
+    internalInstance.appContext.config.globalProperties // 访问 globalProperties
+  }
+```
+## 通过useContext()获取上下文
 
 ```js
 import {useContext} from 'vue'
-const ctx=useContext()//这里ctx就相当于vue2 的this
+const ctx=useContext()//这里ctx获取上下文
 ```
 ## 定义输出 父组件通过ref访问
 
@@ -223,9 +257,8 @@ ctx.expose({
 </template>
 <script setup>
 import Com from 'com/com.vue'
-import {useContext,ref} from 'vue'
+import {ref} from 'vue'
 const hw=ref(null)//要和上面对应
-const ctx=useContext()
 const cont=()=>{
     hw.value.setMetod()//调用方法
 }
